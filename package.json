@@ -1,0 +1,12 @@
+{
+  "name": "ng-challenge",
+  "version": "1.0.0",
+  "description": "desafio full-stack ng challenge",
+  "scripts": {
+    "compose:up": "(cd app && sudo docker-compose up -d --build)",
+    "compose:down": "(cd app && docker-compose down --remove-orphans)"
+  },
+  "author": "Claudio Cassimiro",
+  "keywords": [],
+  "license": "ISC"
+}
