@@ -1,7 +1,8 @@
 FROM node:16.18.1-alpine
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-WORKDIR /home/node/app
-COPY package*.json ./
+RUN mkdir -p /usr/src
+WORKDIR /usr/src
+COPY . /usr/src
 RUN npm install
 RUN npm run build
-CMD ["node_modules/.bin/next", "start"]
+EXPOSE 3000
+CMD npm run start
