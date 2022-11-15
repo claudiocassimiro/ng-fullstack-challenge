@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(uuid())
+  username  String      @unique
+  password  String
+  account   Account?
+
+  @@map("users")
+}
+
+model Account {
+  id              String        @id @default(uuid())
+  balance         Float
+  user            User          @relation(fields: [id], references: [id])
+  userId          String        @unique
+  debitedAccount  Transaction[] @relation("debitedAccount")
+  creditedAccount Transaction[] @relation("creditedAccount")
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id                String      @id @default(uuid())
+  debitedAccount    Account     @relation("debitedAccount", fields: [debitedAccountId], references: [id])
+  debitedAccountId  String
+  creditedAccount   Account     @relation("creditedAccount", fields: [creditedAccountId], references: [id])
+  creditedAccountId String
+  value             Float
+  createdAt         DateTime    @default(now())
+
+  @@map("transaction")
+}
