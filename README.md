@@ -8,7 +8,7 @@
 
 ## Antes de executar o projeto você deve
 
-- **OBS: Você deve está na pasta raiz do projeto para execultar esse comando abaixo `pasta ng-challenge`.**
+- **OBS: Verifique se você está na pasta raiz do projeto para execultar os comandos abaixo `pasta ng-challenge`.**
 
 - Intalar todas as dependencias necessarias com `npm rum install:project`.
 - Para criar o database rode `npm run migrate:dev` esse comando vai rodar o comando `npx prisma migrate dev --name init` no repositório do back-end e gerar as tabelas do banco de dados.
