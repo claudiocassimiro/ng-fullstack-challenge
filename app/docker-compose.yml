@@ -1,5 +1,31 @@
 version: "3.8"
 services:
+  db:
+    image: postgres:15.1-alpine
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  backend:
+    build: ./backend
+    container_name: app_backend
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - SECRET=secret
+      - PORT=3001
+      - DB_PORT=5432
+    depends_on:
+      - db
   frontend:
     build: ./frontend
     container_name: app_frontend
@@ -7,44 +33,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      backend:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
-      timeout: 10s
-      retries: 5
-  backend:
-    build: ./backend
-    container_name: app_backend
-    restart: always
-    ports:
-      - "3001:3001"
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=123456
-      - SECRET=secret
-      - PORT=3001
-      - DB_PORT=5432
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
+      - backend
+volumes:
   db:
-    image: postgres:15.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_HOST_AUTH_METHOD=trust
-    ports:
-      - "5432:5432"
-    container_name: db
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 5
-    cap_add:
-      - SYS_NICE
+    driver: local
