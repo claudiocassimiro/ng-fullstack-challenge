@@ -7,7 +7,7 @@ import { UsersService } from '../service/users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('/create')
   async create(@Body() data: UserDTO) {
     const { username, password } = data;
 
@@ -22,7 +22,7 @@ export class UsersController {
     return this.usersService.create(data);
   }
 
-  @Post()
+  @Post('/login')
   async login(@Body() { username, password }: UserDTO) {
     return this.usersService.login({ username, password });
   }
