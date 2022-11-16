@@ -6,7 +6,7 @@ import { PrismaService } from 'src/shared/database/prisma.service';
 export class AccountsService {
   constructor(private prisma: PrismaService) {}
   async create(data: accountDTO) {
-    const { userId } = data;
+    const { userId, id, balance } = data;
 
     const verifyIfUserExists = await this.prisma.user.findFirst({
       where: {
@@ -19,7 +19,10 @@ export class AccountsService {
     }
 
     return this.prisma.account.create({
-      data,
+      data: {
+        id,
+        balance,
+      },
     });
   }
 }
