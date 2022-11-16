@@ -1,12 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
+import { UserDTO } from 'src/modules/users/dto/users.dto';
 
 @Injectable()
 export class JWTService {
   constructor() {}
 
-  async sign(payload: string): Promise<string> {
-    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
+  async sign(user: UserDTO): Promise<string> {
+    try {
+      return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        expiresIn: '24h',
+      });
+    } catch (error) {
+      throw new Error('Problem when trying to generate token');
+    }
   }
 
   async verify(token: string): Promise<jwt.JwtPayload | string> {

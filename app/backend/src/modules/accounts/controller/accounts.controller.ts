@@ -1,7 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
+import { UserDTO } from 'src/modules/users/dto/users.dto';
 import { AccountsService } from '../service/accounts.service';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
+
+  @Post('/balance')
+  async getBalance(@Body() { id }: UserDTO) {
+    return this.accountsService.getBalance(id);
+  }
 }

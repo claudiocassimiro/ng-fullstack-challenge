@@ -21,10 +21,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - SECRET=secret
+      - JWT_SECRET=secret
       - PORT=3001
       - DB_PORT=5432
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/ng_database?schema=public
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/ng_database?schema=public
     depends_on:
       - db
   frontend:
