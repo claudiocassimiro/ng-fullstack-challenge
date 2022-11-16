@@ -1,5 +1,5 @@
 export type accountDTO = {
-  id: string;
+  id?: string;
   balance: number;
   userId: string;
 };
