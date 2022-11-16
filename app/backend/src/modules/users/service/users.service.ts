@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { AccountsService } from 'src/modules/accounts/service/accounts.service';
 import { PrismaService } from 'src/shared/database/prisma.service';
 import { BcryptService } from 'src/shared/hash/BcryptService';
 import { UserDTO } from '../dto/users.dto';
@@ -9,6 +10,7 @@ export class UsersService {
   constructor(
     private prisma: PrismaService,
     private readonly bcrypt: BcryptService,
+    private account: AccountsService,
   ) {}
 
   async create(data: UserDTO) {
@@ -27,6 +29,13 @@ export class UsersService {
     const hashedPassword = await this.bcrypt.hash(password);
 
     const id = randomUUID();
+    const accountId = randomUUID();
+
+    const userAccount = {
+      id: accountId,
+      balance: 100,
+      userId: id,
+    };
 
     const user = await this.prisma.user.create({
       data: {
@@ -36,6 +45,8 @@ export class UsersService {
       },
     });
 
-    return user;
+    this.account.create(userAccount);
+
+    return { ...user, accountId };
   }
 }
