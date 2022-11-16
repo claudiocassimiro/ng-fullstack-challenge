@@ -14,7 +14,7 @@ export class UsersService {
     });
 
     if (verifyIfUserExists) {
-      throw new Error('Book already exists');
+      throw new Error('User already exists');
     }
 
     const user = await this.prisma.user.create({
