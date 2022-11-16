@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { AccountsService } from 'src/modules/accounts/service/accounts.service';
 import { PrismaService } from 'src/shared/database/prisma.service';
 import { BcryptService } from 'src/shared/hash/BcryptService';
 import { UserDTO } from '../dto/users.dto';
 import { JWTService } from 'src/shared/jwt/JWTService';
+import { JwtPayload } from 'jsonwebtoken';
+import { userLogin } from '../types';
 
 @Injectable()
 export class UsersService {
   constructor(
-    private prisma: PrismaService,
-    private bcrypt: BcryptService,
-    private account: AccountsService,
-    private jwt: JWTService,
+    private prisma?: PrismaService,
+    private bcrypt?: BcryptService,
+    private jwt?: JWTService,
   ) {}
 
   async create(data: UserDTO): Promise<string | Error> {
@@ -58,7 +58,7 @@ export class UsersService {
     }
   }
 
-  async login({ username, password }: UserDTO): Promise<string | Error> {
+  async login({ username, password }: UserDTO): Promise<userLogin | Error> {
     try {
       const user = await this.prisma.user.findFirst({
         where: {
@@ -76,11 +76,21 @@ export class UsersService {
         throw new Error('Invalid password');
       }
 
-      const jwtToken = this.jwt.sign(user);
+      const jwtToken = await this.jwt.sign(user);
 
-      return jwtToken;
+      return { token: jwtToken, id: user.id, accountId: user.accountId };
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  async getUser({ id }: JwtPayload): Promise<UserDTO | undefined> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return user;
   }
 }
