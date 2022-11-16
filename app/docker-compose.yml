@@ -24,7 +24,7 @@ services:
       - SECRET=secret
       - PORT=3001
       - DB_PORT=5432
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/ng_database?schema=public?connect_timeout=300
+      - DATABASE_URL=postgresql://postgres:postgres@localhost:5432/ng_database?schema=public?connect_timeout=300
     depends_on:
       - db
   frontend:
