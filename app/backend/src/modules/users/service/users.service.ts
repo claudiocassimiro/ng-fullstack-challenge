@@ -44,12 +44,13 @@ export class UsersService {
         id,
         username,
         password: hashedPassword,
+        accountId,
       },
     });
 
     this.account.create(userAccount);
 
-    return { ...user, accountId };
+    return user;
   }
 
   async login({ username, password }: UserDTO): Promise<string | Error> {
