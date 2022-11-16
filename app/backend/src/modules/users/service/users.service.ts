@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { PrismaService } from 'src/database/prisma.service';
-import { UserDTO } from './users.dto';
+import { UserDTO } from '../dto/users.dto';
 
 @Injectable()
 export class UsersService {
@@ -17,8 +18,14 @@ export class UsersService {
       throw new Error('User already exists');
     }
 
+    const id = randomUUID();
+
     const user = await this.prisma.user.create({
-      data,
+      data: {
+        id,
+        username: data.username,
+        password: data.password,
+      },
     });
 
     return user;
