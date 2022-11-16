@@ -54,29 +54,33 @@ export class UsersService {
 
       return 'Successfully registered user';
     } catch (error) {
-      throw new Error('Something is wrong with database');
+      throw new Error(error);
     }
   }
 
   async login({ username, password }: UserDTO): Promise<string | Error> {
-    const user = await this.prisma.user.findFirst({
-      where: {
-        username,
-      },
-    });
+    try {
+      const user = await this.prisma.user.findFirst({
+        where: {
+          username,
+        },
+      });
 
-    if (!user) {
-      throw new Error('User not exists');
+      if (!user) {
+        throw new Error('User not exists');
+      }
+
+      const passwordMatch = await this.bcrypt.compare(password, user.password);
+
+      if (!passwordMatch) {
+        throw new Error('Invalid password');
+      }
+
+      const jwtToken = this.jwt.sign(user);
+
+      return jwtToken;
+    } catch (error) {
+      throw new Error(error);
     }
-
-    const passwordMatch = await this.bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
-      throw new Error('Invalid password');
-    }
-
-    const jwtToken = this.jwt.sign(user.id);
-
-    return jwtToken;
   }
 }
