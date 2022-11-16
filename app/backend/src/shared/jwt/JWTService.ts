@@ -8,11 +8,11 @@ export class JWTService {
 
   async sign(user: UserDTO): Promise<string> {
     try {
-      return jwt.sign({ id: user.id }, `process.env.JWT_SECRET`, {
+      return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
         expiresIn: '24h',
       });
     } catch (error) {
-      throw new Error('Invalid token');
+      throw new Error('Problem when trying to generate token');
     }
   }
 
