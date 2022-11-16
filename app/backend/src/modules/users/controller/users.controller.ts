@@ -21,4 +21,9 @@ export class UsersController {
 
     return this.usersService.create(data);
   }
+
+  @Post()
+  async login(@Body() { username, password }: UserDTO) {
+    return this.usersService.login({ username, password });
+  }
 }
