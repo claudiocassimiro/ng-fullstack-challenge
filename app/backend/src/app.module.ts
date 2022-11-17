@@ -18,6 +18,9 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiTokenCheckMiddleware)
-      .forRoutes({ path: 'accounts', method: RequestMethod.POST });
+      .forRoutes(
+        { path: 'accounts', method: RequestMethod.POST },
+        { path: 'transactions', method: RequestMethod.POST },
+      );
   }
 }

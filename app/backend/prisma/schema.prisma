@@ -34,7 +34,7 @@ model Transaction {
   creditedAccount   Account     @relation("creditedAccount", fields: [creditedAccountId], references: [id])
   creditedAccountId String
   value             Float
-  createdAt         DateTime    @default(now())
+  createdAt         DateTime    @default(now()) @db.Date
 
   @@map("transaction")
 }
