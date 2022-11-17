@@ -1,6 +1,6 @@
-export type CheckoutType = {
-  checkOutUsername: string;
-  checkOutAccountId: string;
-  checkInUsername: string;
+export type CashOutType = {
+  cashOutUsername: string;
+  cashOutAccountId: string;
+  cashInUsername: string;
   balance: number;
 };
