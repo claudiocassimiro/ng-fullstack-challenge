@@ -1,4 +1,4 @@
-export type userLogin = {
+export type UserLogin = {
   token: string;
   id: string;
   accountId: string;

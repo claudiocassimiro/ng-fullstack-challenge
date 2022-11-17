@@ -17,10 +17,9 @@ export class ApiTokenCheckMiddleware implements NestMiddleware {
     try {
       const userId = await jwt.verify(token);
 
-      const user = await usersService.getUser({ userId });
+      const user = await usersService.getUserToAuth({ userId });
 
       if (!user) {
-        console.log('entrei');
         throw new Error('Token Invalido');
       }
 

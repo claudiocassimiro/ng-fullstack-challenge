@@ -24,6 +24,9 @@ export class UsersController {
 
   @Post('/login')
   async login(@Body() { username, password }: UserDTO) {
+    if (!username || !password) {
+      throw new Error('Please send the correct values');
+    }
     return this.usersService.login({ username, password });
   }
 }
