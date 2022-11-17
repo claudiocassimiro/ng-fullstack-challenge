@@ -5,6 +5,7 @@ import { PrismaService } from 'src/shared/database/prisma.service';
 import { BcryptService } from 'src/shared/hash/BcryptService';
 import { JWTService } from 'src/shared/jwt/JWTService';
 import { AccountsService } from '../accounts/service/accounts.service';
+import { TransactionsService } from '../transactions/service/transactions.service';
 
 @Module({
   controllers: [UsersController],
@@ -14,6 +15,7 @@ import { AccountsService } from '../accounts/service/accounts.service';
     BcryptService,
     JWTService,
     AccountsService,
+    TransactionsService,
   ],
 })
 export class UsersModule {}
