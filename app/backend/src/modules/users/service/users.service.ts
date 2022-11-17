@@ -5,7 +5,7 @@ import { BcryptService } from 'src/shared/hash/BcryptService';
 import { UserDTO } from '../dto/users.dto';
 import { JWTService } from 'src/shared/jwt/JWTService';
 import { JwtPayload } from 'jsonwebtoken';
-import { userLogin } from '../types';
+import { UserLogin } from '../types';
 
 @Injectable()
 export class UsersService {
@@ -58,7 +58,7 @@ export class UsersService {
     }
   }
 
-  async login({ username, password }: UserDTO): Promise<userLogin | Error> {
+  async login({ username, password }: UserDTO): Promise<UserLogin | Error> {
     try {
       const user = await this.prisma.user.findFirst({
         where: {
