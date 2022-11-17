@@ -3,12 +3,14 @@ import { accountDTO } from '../dto/accounts.dto';
 import { PrismaService } from 'src/shared/database/prisma.service';
 import { CashOutType } from '../types';
 import { UsersService } from '../../users/service/users.service';
+import { TransactionsService } from 'src/modules/transactions/service/transactions.service';
 
 @Injectable()
 export class AccountsService {
   constructor(
     private prisma: PrismaService,
     private usersService: UsersService,
+    private transactionsService: TransactionsService,
   ) {}
   async create(data: accountDTO) {
     try {
@@ -72,6 +74,12 @@ export class AccountsService {
         updateUserCheckOutBalance,
         updateUserCheckInBalance,
       ]);
+
+      await this.transactionsService.create({
+        debitedAccountId: cashOutAccountId,
+        creditedAccountId: userCheckInAccountId,
+        value: balance,
+      });
 
       return 'Successful transfer';
     } catch (error) {
