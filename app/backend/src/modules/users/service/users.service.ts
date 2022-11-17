@@ -84,10 +84,20 @@ export class UsersService {
     }
   }
 
-  async getUser({ id }: JwtPayload): Promise<UserDTO | undefined> {
+  async getUserToAuth({ id }: JwtPayload): Promise<UserDTO | undefined> {
     const user = await this.prisma.user.findUnique({
       where: {
         id,
+      },
+    });
+
+    return user;
+  }
+
+  async getUser(username: string): Promise<UserDTO | undefined> {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        username,
       },
     });
 
