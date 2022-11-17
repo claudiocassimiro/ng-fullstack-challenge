@@ -3,5 +3,5 @@ export type TransactionsDTO = {
   debitedAccountId: string;
   creditedAccountId: string;
   value: number;
-  createdAt: Date;
+  createdAt?: Date;
 };
