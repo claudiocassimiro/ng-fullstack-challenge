@@ -23,3 +23,90 @@
 - Front-End: vai rodar na porta `3000`.
 - Back-End: vai rodar na porta `3001`.
 - Bando de dados vai rodar na porta `5432`.
+
+## Rotas do back-end e payloads a serem passados
+
+### Users: OBS - O nome do usuário precisa ter pelo menos 4 caracteres, enquanto a senha precisa ter 8 caracteres, sendo um desses caracteres um número e o outro uma letra maiúscula.
+
+<br />
+
+#### payload para rota post users/create:
+
+1. username: string
+2. password: string
+
+`users/create retorna um status 200 e uma mensagem: Successfully registered user`
+
+#### payload para rota post users/login:
+
+1. username: string
+2. password: string
+
+`users/login retorna um status 200 e um payload com os dados:`
+
+1. token: string; token do usuario
+2. id: string; id do usuario
+3. accountId: string; id da conta do usuário
+
+<br />
+
+### Accounts: OBS - Assim que um usuário é criado, automaticamente a sua conta também é criada.
+
+#### payload para rota post accounts/balance
+
+1. id: string; id da conta do usuário
+
+`accounts/balance retorna um status 200 e o saldo da conta, que logo ao ser criada já é de R$100`
+
+#### payload para rota post accounts/cashout
+
+1. cashOutUsername: string; nome de quem está transferindo
+2. cashOutAccountId: string; id da conta de quem está transferindo
+3. cashInUsername: string; nome de quem vai recebendo a transferência
+4. balance: number; valor a ser transferido
+
+`accounts/cashout retorna um status 200 e a mensagem: Successful transfer`
+
+<br />
+
+### Transactions: OBS - uma transaction é automaticamente criada na tabela assim que acontece uma transferencia.
+
+#### payload para rota post transactions/all
+
+1. accountId: string; id da conta do usuário
+
+`transactions/all recebe o id da conta e retorna todas as transferências que foram feitas ou recebidas pela conta no formato:`
+
+1. id: string; id da transferência
+2. debitedAccountId: string; id da conta que transferiu
+3. creditedAccountId: string; id da conta que recebeu a transferência
+4. value: number; valor transferido
+5. createdAt: dia que a transferência aconteceu
+
+#### payload para rota post transactions/bydate
+
+1. accountId: string; id da conta do usuário
+2. date: string; data da transferencia no formato yyyy-mm-dd
+
+`transactions/bydate retorna um array de transferências no formato:`
+
+1. type: string; tipo da transferencia, existem dois tipos possiveis, cashOut/cashIn
+2. id: string; id da transferência
+3. debitedAccountId: string; id da conta que transferiu
+4. creditedAccountId: string; id da conta que recebeu a transferência
+5. value: number; valor transferido
+6. createdAt: dia que a transferência aconteceu
+
+#### payload para rota post transactions/type
+
+1. accountId: string; id da conta
+2. type: string; tipo buscado de transferencia cashOut ou cashIn
+
+`transactions/bytype retorna um array de transferências no formato:`
+
+1. type: string; tipo da transferencia, que foi passado no body da request
+2. id: string; id da transferência
+3. debitedAccountId: string; id da conta que transferiu
+4. creditedAccountId: string; id da conta que recebeu a transferência
+5. value: number; valor transferido
+6. createdAt: dia que a transferência aconteceu
