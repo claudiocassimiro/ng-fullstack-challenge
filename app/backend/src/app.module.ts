@@ -7,9 +7,10 @@ import {
 import { UsersModule } from './modules/users/users.module';
 import { AccountsModule } from './modules/accounts/accounts.module';
 import { ApiTokenCheckMiddleware } from './shared/middlewares/api-token-check.middleware';
+import { TransactionsModule } from './modules/transactions/transactions.module';
 
 @Module({
-  imports: [UsersModule, AccountsModule],
+  imports: [UsersModule, AccountsModule, TransactionsModule],
   controllers: [],
   providers: [],
 })
