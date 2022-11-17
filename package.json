@@ -4,7 +4,7 @@
   "description": "desafio full-stack ng challenge",
   "scripts": {
     "install:project": "(cd app && cd backend && npm install && cd .. && cd frontend && npm install)",
-    "migrate:dev": "(cd app && cd backend && npx prisma migrate dev)",
+    "migrate:dev": "(cd app && cd backend && npx prisma migrate dev --name initial-migration --create-only)",
     "compose:up": "(cd app && sudo docker-compose up -d --build)",
     "compose:down": "(cd app && docker-compose down --remove-orphans)"
   },
