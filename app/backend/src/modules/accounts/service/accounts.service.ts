@@ -20,12 +20,8 @@ export class AccountsService {
     }
   }
 
-  async getBalance(id: string) {
+  async getBalance(accountId: string) {
     try {
-      const { accountId } = await this.prisma.user.findUnique({
-        where: { id },
-      });
-
       const { balance } = await this.prisma.account.findFirst({
         where: {
           id: accountId,

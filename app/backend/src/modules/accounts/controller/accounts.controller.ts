@@ -7,7 +7,7 @@ export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Post('/balance')
-  async getBalance(@Body() { id }: UserDTO) {
-    return this.accountsService.getBalance(id);
+  async getBalance(@Body() { accountId }: UserDTO) {
+    return this.accountsService.getBalance(accountId);
   }
 }
