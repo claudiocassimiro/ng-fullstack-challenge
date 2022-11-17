@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { UserDTO } from 'src/modules/users/dto/users.dto';
+import { accountDTO } from '../dto/accounts.dto';
 import { AccountsService } from '../service/accounts.service';
 import { CashOutType } from '../types';
 
@@ -8,12 +8,12 @@ export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Post('/balance')
-  async getBalance(@Body() { accountId }: UserDTO) {
-    if (!accountId) {
+  async getBalance(@Body() { id }: accountDTO) {
+    if (!id) {
       throw new Error('Please send the correct values');
     }
 
-    return this.accountsService.getBalance(accountId);
+    return this.accountsService.getBalance(id);
   }
 
   @Post('/cashout')
