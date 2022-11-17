@@ -29,7 +29,10 @@ export class TransactionsController {
     @Body() { accountId, date }: TransactionsByDate,
   ) {
     if (!accountId || !date) {
-      throw new Error('Please send the correct values');
+      throw new HttpException(
+        'Please send the correct values',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     return await this.transactionsService.findAllTransactionsByDate({
