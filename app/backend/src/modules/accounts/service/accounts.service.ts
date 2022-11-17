@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { accountDTO } from '../dto/accounts.dto';
 import { PrismaService } from 'src/shared/database/prisma.service';
 import { CashOutType } from '../types';
@@ -23,7 +23,7 @@ export class AccountsService {
         },
       });
     } catch (error) {
-      throw new Error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -37,7 +37,7 @@ export class AccountsService {
 
       return balance;
     } catch (error) {
-      throw new Error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -83,7 +83,7 @@ export class AccountsService {
 
       return 'Successful transfer';
     } catch (error) {
-      throw new Error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

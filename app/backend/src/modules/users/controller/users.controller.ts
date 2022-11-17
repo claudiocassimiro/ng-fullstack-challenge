@@ -1,4 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { validatePassword } from 'src/shared/helpers/validatePassword';
 import { UserDTO } from '../dto/users.dto';
 import { UsersService } from '../service/users.service';
@@ -12,20 +19,24 @@ export class UsersController {
     const { username, password } = data;
 
     if (username.length < 3) {
-      throw new Error('username too short');
+      throw new HttpException('Username too short', HttpStatus.BAD_REQUEST);
     }
 
     if (!validatePassword(password)) {
-      throw new Error('password too weak');
+      throw new HttpException('Password too weak', HttpStatus.BAD_REQUEST);
     }
 
     return this.usersService.create(data);
   }
 
   @Post('/login')
+  @HttpCode(200)
   async login(@Body() { username, password }: UserDTO) {
     if (!username || !password) {
-      throw new Error('Please send the correct values');
+      throw new HttpException(
+        'Please send the correct values',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     return this.usersService.login({ username, password });
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { PrismaService } from 'src/shared/database/prisma.service';
 import { BcryptService } from 'src/shared/hash/BcryptService';
@@ -26,7 +26,7 @@ export class UsersService {
       });
 
       if (verifyIfUserExists) {
-        throw new Error('User already exists');
+        throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
       }
 
       const accountId = randomUUID();
@@ -54,7 +54,7 @@ export class UsersService {
 
       return 'Successfully registered user';
     } catch (error) {
-      throw new Error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -67,40 +67,48 @@ export class UsersService {
       });
 
       if (!user) {
-        throw new Error('User not exists');
+        throw new HttpException('User not exists', HttpStatus.BAD_REQUEST);
       }
 
       const passwordMatch = await this.bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
-        throw new Error('Invalid password');
+        throw new HttpException('Invalid password', HttpStatus.BAD_REQUEST);
       }
 
       const jwtToken = await this.jwt.sign(user);
 
       return { token: jwtToken, id: user.id, accountId: user.accountId };
     } catch (error) {
-      throw new Error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   async getUserToAuth({ id }: JwtPayload): Promise<UserDTO | undefined> {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id,
-      },
-    });
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
 
-    return user;
+      return user;
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   async getUser(username: string): Promise<UserDTO | undefined> {
-    const user = await this.prisma.user.findFirst({
-      where: {
-        username,
-      },
-    });
+    try {
+      const user = await this.prisma.user.findFirst({
+        where: {
+          username,
+        },
+      });
 
-    return user;
+      return user;
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
