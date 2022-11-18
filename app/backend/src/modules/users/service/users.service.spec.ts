@@ -50,7 +50,7 @@ describe('UsersService', () => {
   describe('when try created a new user', () => {
     it('the function create is called and the user is save on database, should be returned a text "Successfully registered user"', () => {
       const user = null;
-      // @ts-ignore
+
       prismaMock.user.findFirst.mockResolvedValue(user);
       expect(
         service.create({ username: 'Claudio', password: 'Cassimiro1' }),
@@ -64,7 +64,7 @@ describe('UsersService', () => {
         password: 'Cassimiro1',
         accountId: 'mock accoundId',
       };
-      // @ts-ignore
+
       prismaMock.user.findFirst.mockResolvedValue(user);
       expect(
         service.create({ username: 'Claudio', password: 'Cassimiro1' }),
@@ -86,6 +86,7 @@ describe('UsersService', () => {
         id: 'mock userId',
         accountId: 'mock accountId',
       };
+
       // @ts-ignore
       prismaMock.user.findFirst.mockResolvedValue(returnedLoginObject);
       expect(service.login(userObject)).resolves.toEqual(returnedLoginObject);
@@ -114,7 +115,7 @@ describe('UsersService', () => {
         password: 'Cassimiro1',
         accountId: 'mock accoundId',
       };
-      // @ts-ignore
+
       prismaMock.user.findFirst.mockResolvedValue(user);
 
       mockBcryptService.compare = jest.fn(() => false);
@@ -134,7 +135,6 @@ describe('UsersService', () => {
         accountId: 'mock accoundId',
       };
 
-      // @ts-ignore
       prismaMock.user.findUnique.mockResolvedValue(user);
 
       expect(service.getUserToAuth({ id: 'mock id' })).resolves.toEqual(user);
@@ -143,7 +143,6 @@ describe('UsersService', () => {
     it('when the getUserToAuth function is called with an id of a non-existent user, shoud be returned null', () => {
       const user = null;
 
-      // @ts-ignore
       prismaMock.user.findUnique.mockResolvedValue(user);
 
       expect(
@@ -161,7 +160,6 @@ describe('UsersService', () => {
         accountId: 'mock accoundId',
       };
 
-      // @ts-ignore
       prismaMock.user.findFirst.mockResolvedValue(user);
 
       expect(service.getUser('Claudio')).resolves.toEqual(user);
@@ -170,7 +168,6 @@ describe('UsersService', () => {
     it('when the getUser function is called with a username of a non-existent user, shoud be returned null', () => {
       const user = null;
 
-      // @ts-ignore
       prismaMock.user.findFirst.mockResolvedValue(user);
 
       expect(service.getUser('Paulo')).resolves.toEqual(null);
