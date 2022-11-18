@@ -14,6 +14,7 @@
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "semi": ["error", "always"]
   }
 }
