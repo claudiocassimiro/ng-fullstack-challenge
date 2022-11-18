@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { accountDTO } from '../dto/accounts.dto';
-import { PrismaService } from 'src/shared/database/prisma.service';
+import { PrismaService } from '../../../shared/database/prisma.service';
 import { CashOutType } from '../types';
 import { UsersService } from '../../users/service/users.service';
-import { TransactionsService } from 'src/modules/transactions/service/transactions.service';
+import { TransactionsService } from '../../../modules/transactions/service/transactions.service';
 
 @Injectable()
 export class AccountsService {
