@@ -6,7 +6,6 @@ import {
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
-import { accountDTO } from '../dto/accounts.dto';
 import { AccountsService } from '../service/accounts.service';
 import { CashOutType } from '../types';
 
@@ -16,10 +15,10 @@ export class AccountsController {
 
   @Post('/balance')
   @HttpCode(200)
-  async getBalance(@Body() { id }: accountDTO) {
+  async getBalance(@Body() id: string) {
     if (!id) {
       throw new HttpException(
-        'Please send the correct values',
+        "Please don't pass empty fields",
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -29,12 +28,12 @@ export class AccountsController {
 
   @Post('/cashout')
   @HttpCode(200)
-  async cashOut(@Body() cashOutObject: CashOutType) {
+  async setCashOut(@Body() cashOutObject: CashOutType) {
     const { cashOutUsername, cashInUsername, cashOutAccountId, balance } =
       cashOutObject;
     if (!cashOutUsername || !cashInUsername || !cashOutAccountId || !balance) {
       throw new HttpException(
-        'Please send the correct values',
+        "Please don't pass empty fields",
         HttpStatus.BAD_REQUEST,
       );
     }
