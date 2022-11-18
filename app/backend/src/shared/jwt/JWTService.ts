@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
-import { UserDTO } from 'src/modules/users/dto/users.dto';
+import { UserDTO } from '../../modules/users/dto/users.dto';
 
 @Injectable()
 export class JWTService {

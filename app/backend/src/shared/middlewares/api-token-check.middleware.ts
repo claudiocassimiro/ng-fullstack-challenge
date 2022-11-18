@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { JWTService } from 'src/shared/jwt/JWTService';
+import { JWTService } from '../../shared/jwt/JWTService';
 import { UsersService } from '../../modules/users/service/users.service';
 
 export class ApiTokenCheckMiddleware implements NestMiddleware {
