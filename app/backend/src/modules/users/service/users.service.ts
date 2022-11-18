@@ -54,7 +54,7 @@ export class UsersService {
 
       return 'Successfully registered user';
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -80,7 +80,7 @@ export class UsersService {
 
       return { token: jwtToken, id: user.id, accountId: user.accountId };
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -94,7 +94,7 @@ export class UsersService {
 
       return user;
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -108,7 +108,7 @@ export class UsersService {
 
       return user;
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 }

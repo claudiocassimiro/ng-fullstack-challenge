@@ -37,7 +37,7 @@ export class AccountsService {
 
       return balance;
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -46,7 +46,7 @@ export class AccountsService {
       const userCheckOutBalance = await this.getBalance(cashOutAccountId);
 
       if (balance > userCheckOutBalance) {
-        throw new Error('Insuficient balance');
+        throw new HttpException('Insuficient balance', HttpStatus.BAD_REQUEST);
       }
 
       const updateUserCheckOutBalance = this.prisma.account.update({
@@ -83,7 +83,7 @@ export class AccountsService {
 
       return 'Successful transfer';
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 }

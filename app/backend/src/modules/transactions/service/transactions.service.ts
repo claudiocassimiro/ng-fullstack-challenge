@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../shared/database/prisma.service';
 import { randomUUID } from 'crypto';
 import { TransactionsDTO } from '../dto/transactions.dto';
@@ -14,7 +14,7 @@ export class TransactionsService {
 
       return this.prisma.transaction.create({ data: { id, ...data } });
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -31,7 +31,7 @@ export class TransactionsService {
 
       return transactions;
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -64,7 +64,7 @@ export class TransactionsService {
 
       return [...cashOutTransactions, ...cashInTransactions];
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 
@@ -96,7 +96,7 @@ export class TransactionsService {
 
       return cashInTransactions;
     } catch (error) {
-      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.response, error.status);
     }
   }
 }
