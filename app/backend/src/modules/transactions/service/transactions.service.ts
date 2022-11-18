@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/shared/database/prisma.service';
+import { PrismaService } from '../../../shared/database/prisma.service';
 import { randomUUID } from 'crypto';
 import { TransactionsDTO } from '../dto/transactions.dto';
 import { TransactionsByDate, TransactionsByType } from '../types';
