@@ -17,7 +17,10 @@ export class TransactionsController {
   @HttpCode(200)
   async findAllTransactions(@Body() { accountId }: Transactions) {
     if (!accountId) {
-      throw new Error('Please send the correct values');
+      throw new HttpException(
+        "Please don't send empty fields",
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     return await this.transactionsService.findAllTransactions(accountId);
@@ -30,7 +33,7 @@ export class TransactionsController {
   ) {
     if (!accountId || !date) {
       throw new HttpException(
-        'Please send the correct values',
+        "Please don't send empty fields",
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -48,7 +51,7 @@ export class TransactionsController {
   ) {
     if (!accountId || !type) {
       throw new HttpException(
-        'Please send the correct values',
+        "Please don't send empty fields",
         HttpStatus.BAD_REQUEST,
       );
     }

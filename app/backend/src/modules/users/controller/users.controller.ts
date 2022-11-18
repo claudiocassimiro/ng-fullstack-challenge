@@ -6,7 +6,7 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { validatePassword } from 'src/shared/helpers/validatePassword';
+import { validatePassword } from '../../../shared/helpers/validatePassword';
 import { UserDTO } from '../dto/users.dto';
 import { UsersService } from '../service/users.service';
 
@@ -34,7 +34,7 @@ export class UsersController {
   async login(@Body() { username, password }: UserDTO) {
     if (!username || !password) {
       throw new HttpException(
-        'Please send the correct values',
+        "Please don't send empty fields",
         HttpStatus.BAD_REQUEST,
       );
     }

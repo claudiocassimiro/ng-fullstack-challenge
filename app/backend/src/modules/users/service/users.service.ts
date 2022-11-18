@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { PrismaService } from 'src/shared/database/prisma.service';
-import { BcryptService } from 'src/shared/hash/BcryptService';
+import { PrismaService } from '../../../shared/database/prisma.service';
+import { BcryptService } from '../../../shared/hash/BcryptService';
 import { UserDTO } from '../dto/users.dto';
-import { JWTService } from 'src/shared/jwt/JWTService';
+import { JWTService } from '../../../shared/jwt/JWTService';
 import { JwtPayload } from 'jsonwebtoken';
 import { UserLogin } from '../types';
 
