@@ -16,13 +16,23 @@
 }
 
 .HomeContainerText {
-  max-width: 56rem;
+  max-width: 26rem;
 }
 
 .HomeAboutUsText {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.1rem;
   color: white;
+}
+
+@media (min-width: 1024) {
+  .HomeContainerText {
+    max-width: 56rem;
+  }
+
+  .HomeAboutUsText {
+    font-size: 3rem;
+  }
 }
