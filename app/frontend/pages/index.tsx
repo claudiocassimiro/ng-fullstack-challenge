@@ -1,7 +1,9 @@
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { useWindowSize } from "../utils/helpers";
 
 export default function Home() {
+  const { isDesktop } = useWindowSize();
   return (
     <div className={styles.HomeContainer}>
       {/* <Header /> */}
@@ -9,8 +11,8 @@ export default function Home() {
         <Image
           src="/images/ngcash.webp"
           alt="logo da ng.cash"
-          width="556"
-          height="406"
+          width={isDesktop ? 556 : 278}
+          height={isDesktop ? 406 : 203}
         />
         <div className={styles.HomeContainerText}>
           <p className={styles.HomeAboutUsText}>
