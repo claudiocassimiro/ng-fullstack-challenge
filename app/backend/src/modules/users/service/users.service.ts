@@ -78,7 +78,12 @@ export class UsersService {
 
       const jwtToken = await this.jwt.sign(user);
 
-      return { token: jwtToken, id: user.id, accountId: user.accountId };
+      return {
+        token: jwtToken,
+        username,
+        id: user.id,
+        accountId: user.accountId,
+      };
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
