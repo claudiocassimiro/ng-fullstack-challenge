@@ -18,41 +18,43 @@ export default function Header() {
   const router = useRouter();
   return (
     <header className={styles.header}>
-      <Image
-        src="/images/logo-ngcash.svg"
-        alt="logo ngcash"
-        width={isDesktop ? 160 : 120}
-        height={isDesktop ? 48 : 38}
-      />
-      <div
-        className={cn(styles.HeaderContainerButtons, {
-          [styles.HeaderContainerButton]: token,
-        })}
-      >
-        {token ? (
-          <a
-            data-testid="button-go-to-account"
-            className={styles.HeaderButton}
-            onClick={() => router.push("/account")}
-          >
-            Ir para conta
-          </a>
-        ) : (
-          <div data-testid="container-login-and-sign-in-buttons">
+      <div className={styles.HeaderContainer}>
+        <Image
+          src="/images/logo-ngcash.svg"
+          alt="logo ngcash"
+          width={isDesktop ? 160 : 120}
+          height={isDesktop ? 48 : 38}
+        />
+        <div
+          className={cn(styles.HeaderContainerButtons, {
+            [styles.HeaderContainerButton]: token,
+          })}
+        >
+          {token ? (
             <a
+              data-testid="button-go-to-account"
               className={styles.HeaderButton}
-              onClick={() => router.push("/login")}
+              onClick={() => router.push("/account")}
             >
-              Login
+              Ir para conta
             </a>
-            <a
-              className={styles.HeaderButton}
-              onClick={() => router.push("/sign-in")}
-            >
-              Criar uma conta
-            </a>
-          </div>
-        )}
+          ) : (
+            <div data-testid="container-login-and-sign-in-buttons">
+              <a
+                className={styles.HeaderButton}
+                onClick={() => router.push("/login")}
+              >
+                Login
+              </a>
+              <a
+                className={styles.HeaderButton}
+                onClick={() => router.push("/sign-in")}
+              >
+                Criar uma conta
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
