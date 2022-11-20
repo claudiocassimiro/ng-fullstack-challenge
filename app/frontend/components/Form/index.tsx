@@ -22,11 +22,12 @@ export default function Form({ buttonText, pathToCall }: FormProps) {
     e.preventDefault();
     setError("");
     if (username.length < 3) {
-      return setError("O nome de usuário deve conter ao menos 3 caracteres");
+      console.log(`okay`);
+      return setError("Username must contain at least 3 characters");
     }
 
     if (password.length < 8) {
-      return setError("A senha deve conter ao menos 8 caracteres");
+      return setError("The password must contain at least 8 characters");
     }
 
     try {
@@ -74,13 +75,21 @@ export default function Form({ buttonText, pathToCall }: FormProps) {
     } catch (error) {
       console.log(error);
     }
+
+    setUsername("");
+    setPassword("");
   };
 
   return (
     <div className={styles.formContainer}>
       <form className={styles.formContent} onSubmit={(e) => handleSubmit(e)}>
         {buttonText === "Criar conta" ? (
-          <p className={styles.formText}>Vem ser</p>
+          <p
+            data-testid="paragraph-to-call-clients"
+            className={styles.formText}
+          >
+            Vem ser
+          </p>
         ) : null}
         <Image
           src="/images/ngcash.webp"
@@ -110,10 +119,16 @@ export default function Form({ buttonText, pathToCall }: FormProps) {
         </div>
 
         {error.length > 0 ? (
-          <p className={styles.formErrorMessage}>{error}</p>
+          <p data-testid="error-paragraph" className={styles.formErrorMessage}>
+            {error}
+          </p>
         ) : null}
 
-        <button className={styles.formSubmitButton} type="submit">
+        <button
+          data-testid="submit-button"
+          className={styles.formSubmitButton}
+          type="submit"
+        >
           {buttonText}
         </button>
       </form>
