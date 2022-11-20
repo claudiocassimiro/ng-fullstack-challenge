@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Header from "../components/Header";
 import styles from "../styles/Home.module.css";
 import { useWindowSize } from "../utils/helpers";
 
@@ -6,7 +7,7 @@ export default function Home() {
   const { isDesktop } = useWindowSize();
   return (
     <div className={styles.HomeContainer}>
-      {/* <Header /> */}
+      <Header />
       <main className={styles.HomeMainContent}>
         <Image
           src="/images/ngcash.webp"
