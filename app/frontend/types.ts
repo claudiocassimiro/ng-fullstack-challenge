@@ -6,3 +6,11 @@ export interface WindowSizes {
   isDesktop: boolean;
   isTablet: boolean;
 }
+
+export interface UserObject {
+  token: string;
+  id: string;
+  accountId: string;
+  status?: number;
+  message?: string;
+}
