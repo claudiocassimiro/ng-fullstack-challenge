@@ -10,12 +10,11 @@ export default function Header() {
   const [cookie] = useCookies(["token"]);
   const { isDesktop } = useWindowSize();
   const [token, setToken] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     setToken(cookie.token);
   }, [cookie]);
-
-  const router = useRouter();
   return (
     <header className={styles.header}>
       <div className={styles.HeaderContainer}>
