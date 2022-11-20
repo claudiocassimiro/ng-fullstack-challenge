@@ -1,9 +1,11 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useWindowSize } from "../../utils/helpers";
 import styles from "./styles.module.css";
 
 export default function Header() {
   const { isDesktop } = useWindowSize();
+  const router = useRouter();
   return (
     <header className={styles.header}>
       <Image
@@ -13,10 +15,16 @@ export default function Header() {
         height={isDesktop ? 48 : 38}
       />
       <div className={styles.HeaderContainerButtons}>
-        <a className={styles.HeaderButton} href="/login">
+        <a
+          className={styles.HeaderButton}
+          onClick={() => router.push("/login")}
+        >
           Login
         </a>
-        <a className={styles.HeaderButton} href="/sign-in">
+        <a
+          className={styles.HeaderButton}
+          onClick={() => router.push("/sign-in")}
+        >
           Criar uma conta
         </a>
       </div>
