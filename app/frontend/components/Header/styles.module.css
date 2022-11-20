@@ -47,4 +47,8 @@
     width: 16rem;
     height: 4.8rem;
   }
+
+  .HeaderButton {
+    margin-right: 0.5rem;
+  }
 }
