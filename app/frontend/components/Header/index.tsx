@@ -13,10 +13,10 @@ export default function Header() {
         height={isDesktop ? 48 : 38}
       />
       <div className={styles.HeaderContainerButtons}>
-        <a className={styles.HeaderButton} href="#">
+        <a className={styles.HeaderButton} href="/login">
           Login
         </a>
-        <a className={styles.HeaderButton} href="#">
+        <a className={styles.HeaderButton} href="/sign-in">
           Criar uma conta
         </a>
       </div>
