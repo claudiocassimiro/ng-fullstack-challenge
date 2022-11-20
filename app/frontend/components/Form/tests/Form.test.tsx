@@ -16,7 +16,7 @@ vi.mock(`next/router`, () => ({
   },
 }));
 
-describe("FloatWhatsAppButton", () => {
+describe("Form", () => {
   afterAll(() => {
     vi.clearAllMocks();
   });
