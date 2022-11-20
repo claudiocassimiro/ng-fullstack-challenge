@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  position: absolute;
+  top: 0;
+}
+
+.HeaderContainerButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem;
+  width: 15rem;
+  height: 3.8rem;
+}
+
+.HeaderButton {
+  padding: 1rem;
+  border-radius: 2.5rem;
+  border: 0.1rem solid #fff;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.HeaderButton:hover {
+  border: 0.1rem solid #ccc;
+}
+
+@media (min-width: 1024px) {
+  .HeaderContainerButtons {
+    margin-right: 2.5rem;
+    width: 16rem;
+    height: 4.8rem;
+  }
+}
