@@ -51,6 +51,7 @@ export default function Form({ buttonText, pathToCall }: FormProps) {
 
         const userObject = {
           id: data.id,
+          username: data.username,
           accountId: data.accountId,
         };
 

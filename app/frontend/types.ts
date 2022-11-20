@@ -10,6 +10,7 @@ export interface WindowSizes {
 export interface UserObject {
   token: string;
   id: string;
+  username: string;
   accountId: string;
   status?: number;
   message?: string;
