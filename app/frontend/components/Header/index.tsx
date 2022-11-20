@@ -31,13 +31,14 @@ export default function Header() {
       >
         {token ? (
           <a
+            data-testid="button-go-to-account"
             className={styles.HeaderButton}
             onClick={() => router.push("/account")}
           >
             Ir para conta
           </a>
         ) : (
-          <>
+          <div data-testid="container-login-and-sign-in-buttons">
             <a
               className={styles.HeaderButton}
               onClick={() => router.push("/login")}
@@ -50,7 +51,7 @@ export default function Header() {
             >
               Criar uma conta
             </a>
-          </>
+          </div>
         )}
       </div>
     </header>
