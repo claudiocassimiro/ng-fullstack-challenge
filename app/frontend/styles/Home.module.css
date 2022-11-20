@@ -1,0 +1,28 @@
+.HomeContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+}
+
+.HomeMainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 144rem;
+  margin: 0 auto;
+}
+
+.HomeContainerText {
+  max-width: 56rem;
+}
+
+.HomeAboutUsText {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.1rem;
+  color: white;
+}
