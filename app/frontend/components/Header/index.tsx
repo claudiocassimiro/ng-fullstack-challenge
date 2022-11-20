@@ -1,10 +1,20 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useWindowSize } from "../../utils/helpers";
 import styles from "./styles.module.css";
+import cn from "classnames";
 
 export default function Header() {
+  const [cookie] = useCookies(["token"]);
   const { isDesktop } = useWindowSize();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    setToken(cookie.token);
+  }, [cookie]);
+
   const router = useRouter();
   return (
     <header className={styles.header}>
@@ -14,19 +24,34 @@ export default function Header() {
         width={isDesktop ? 160 : 120}
         height={isDesktop ? 48 : 38}
       />
-      <div className={styles.HeaderContainerButtons}>
-        <a
-          className={styles.HeaderButton}
-          onClick={() => router.push("/login")}
-        >
-          Login
-        </a>
-        <a
-          className={styles.HeaderButton}
-          onClick={() => router.push("/sign-in")}
-        >
-          Criar uma conta
-        </a>
+      <div
+        className={cn(styles.HeaderContainerButtons, {
+          [styles.HeaderContainerButton]: token,
+        })}
+      >
+        {token ? (
+          <a
+            className={styles.HeaderButton}
+            onClick={() => router.push("/account")}
+          >
+            Ir para conta
+          </a>
+        ) : (
+          <>
+            <a
+              className={styles.HeaderButton}
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </a>
+            <a
+              className={styles.HeaderButton}
+              onClick={() => router.push("/sign-in")}
+            >
+              Criar uma conta
+            </a>
+          </>
+        )}
       </div>
     </header>
   );
