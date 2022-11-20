@@ -17,6 +17,11 @@
   height: 3.8rem;
 }
 
+.HeaderContainerButton {
+  justify-content: center;
+  margin-right: 0;
+}
+
 .HeaderButton {
   padding: 1rem;
   border-radius: 2.5rem;
