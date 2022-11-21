@@ -81,7 +81,7 @@ export class AccountsService {
         value: balance,
       });
 
-      return 'Successful transfer';
+      return { message: 'Successful transfer' };
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
