@@ -35,7 +35,7 @@ export class AccountsService {
         },
       });
 
-      return balance;
+      return { balance };
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
@@ -45,7 +45,7 @@ export class AccountsService {
     try {
       const userCheckOutBalance = await this.getBalance(cashOutAccountId);
 
-      if (balance > userCheckOutBalance) {
+      if (balance > userCheckOutBalance.balance) {
         throw new HttpException('Insuficient balance', HttpStatus.BAD_REQUEST);
       }
 
