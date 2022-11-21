@@ -19,19 +19,17 @@ export default function TransactionForm({
   const [transactionUsername, setTransactionUsername] = useState("");
   const [transactionValue, setTransactionValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [sucessMessage, setSucessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleTransactionSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (transactionUsername === username) {
-      return setErrorMessage(
-        "Você não pode fazer uma transação para você mesmo."
-      );
+      return setErrorMessage("You cannot make a transaction for yourself.");
     }
 
     if (Number(transactionValue) > balance) {
-      return setErrorMessage("Saldo insuficiente.");
+      return setErrorMessage("Insufficient funds.");
     }
 
     const cashoutObject = {
@@ -56,7 +54,7 @@ export default function TransactionForm({
 
       const data = await response.json();
 
-      setSucessMessage(data.message);
+      setSuccessMessage(data.message);
       setTransactionUsername("");
       setTransactionValue("");
     } catch (error) {
@@ -65,13 +63,13 @@ export default function TransactionForm({
   };
 
   useEffect(() => {
-    if (sucessMessage.length > 1) {
+    if (successMessage.length > 1) {
       getAccountBalance();
       setTimeout(() => {
-        setSucessMessage("");
+        setSuccessMessage("");
       }, 3000);
     }
-  }, [sucessMessage]);
+  }, [successMessage]);
 
   useEffect(() => {
     if (errorMessage.length > 1) {
@@ -107,12 +105,26 @@ export default function TransactionForm({
         />
       </div>
       {errorMessage.length > 0 ? (
-        <p className={styles.TransactionErrorMessage}>{errorMessage}</p>
+        <p
+          data-testid="error-message"
+          className={styles.TransactionErrorMessage}
+        >
+          {errorMessage}
+        </p>
       ) : null}
-      {sucessMessage.length > 0 ? (
-        <p className={styles.TransactionSucessMessage}>{sucessMessage}</p>
+      {successMessage.length > 0 ? (
+        <p
+          data-testid="success-message"
+          className={styles.TransactionSuccessMessage}
+        >
+          {successMessage}
+        </p>
       ) : null}
-      <button className={styles.TransactionSubmitButton} type="submit">
+      <button
+        data-testid="submit-button"
+        className={styles.TransactionSubmitButton}
+        type="submit"
+      >
         Enviar
       </button>
     </form>
