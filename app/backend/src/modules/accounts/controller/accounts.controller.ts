@@ -15,7 +15,7 @@ export class AccountsController {
 
   @Post('/balance')
   @HttpCode(200)
-  async getBalance(@Body() id: string) {
+  async getBalance(@Body() { id }: { id: string }) {
     if (!id) {
       throw new HttpException(
         "Please don't pass empty fields",
