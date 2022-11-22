@@ -16,9 +16,15 @@ export class JWTService {
     }
   }
 
-  async verify(token: string): Promise<jwt.JwtPayload | string> {
+  async verify(
+    token: string,
+  ): Promise<{ id: string; iat: number; exp: number }> {
     try {
-      return jwt.verify(token, process.env.JWT_SECRET);
+      return jwt.verify(token, process.env.JWT_SECRET) as {
+        id: string;
+        iat: number;
+        exp: number;
+      };
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
