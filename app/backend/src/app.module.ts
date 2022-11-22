@@ -6,21 +6,25 @@ import {
 } from '@nestjs/common';
 import { UsersModule } from './modules/users/users.module';
 import { AccountsModule } from './modules/accounts/accounts.module';
-import { ApiTokenCheckMiddleware } from './shared/middlewares/api-token-check.middleware';
+import { ApiTokenCheckMiddleware } from './middlewares/api-token-check.middleware';
 import { TransactionsModule } from './modules/transactions/transactions.module';
+import { PrismaService } from './shared/database/prisma.service';
 
 @Module({
   imports: [UsersModule, AccountsModule, TransactionsModule],
   controllers: [],
-  providers: [],
+  providers: [PrismaService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiTokenCheckMiddleware)
-      .forRoutes(
-        { path: 'accounts', method: RequestMethod.POST },
-        { path: 'transactions', method: RequestMethod.POST },
-      );
+      .forRoutes({ path: '/transactions/*', method: RequestMethod.POST });
+    consumer
+      .apply(ApiTokenCheckMiddleware)
+      .forRoutes({ path: '/accounts/balance', method: RequestMethod.POST });
+    consumer
+      .apply(ApiTokenCheckMiddleware)
+      .forRoutes({ path: '/accounts/cashout', method: RequestMethod.POST });
   }
 }
