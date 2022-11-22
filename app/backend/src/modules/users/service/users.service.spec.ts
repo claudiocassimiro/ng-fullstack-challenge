@@ -126,31 +126,6 @@ describe('UsersService', () => {
     });
   });
 
-  describe('get user infos to Auth', () => {
-    it('when the getUserToAuth function is called with an id of a exiting user, shoud be returned a user object', () => {
-      const user = {
-        id: 'mock id',
-        username: 'Claudio',
-        password: 'Cassimiro1',
-        accountId: 'mock accoundId',
-      };
-
-      prismaMock.user.findUnique.mockResolvedValue(user);
-
-      expect(service.getUserToAuth({ id: 'mock id' })).resolves.toEqual(user);
-    });
-
-    it('when the getUserToAuth function is called with an id of a non-existent user, shoud be returned null', () => {
-      const user = null;
-
-      prismaMock.user.findUnique.mockResolvedValue(user);
-
-      expect(
-        service.getUserToAuth({ id: 'nonexistent mock id' }),
-      ).resolves.toBe(null);
-    });
-  });
-
   describe('get user infos', () => {
     it('when the getUser function is called with an username of a exiting user, shoud be returned a user object', () => {
       const user = {
