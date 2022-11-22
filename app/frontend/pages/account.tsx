@@ -6,6 +6,7 @@ import TransactionForm from "../components/TransactionForm";
 import TransactionsHistory from "../components/TransactionsHistory";
 import styles from "../styles/Account.module.css";
 import { useWindowSize } from "../utils/helpers";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function Account() {
   const initialUserObject = {
@@ -17,6 +18,7 @@ export default function Account() {
   const [userObject, setUserObject] = useState(initialUserObject);
   const [token, setToken] = useState("");
   const [formattedBalance, setFormatedBalance] = useState("");
+  const [showHistory, setShowHistory] = useState(false);
   const [balance, setBalance] = useState(0);
   const { isDesktop } = useWindowSize();
   const [tokenCookie, , removeTokenCookie] = useCookies(["token"]);
@@ -108,8 +110,23 @@ export default function Account() {
           />
         </div>
         <div className={styles.AccountDataContainer}>
-          <p className={styles.AccountText}>{`Histórico de transferências`}</p>
-          <TransactionsHistory accountId={accountId} token={token} />
+          <div className={styles.AccountAuxContainer}>
+            <p
+              className={styles.AccountText}
+            >{`Histórico de transferências`}</p>
+            {showHistory ? (
+              <AiOutlineClose
+                className={styles.AccountCloseIcon}
+                onClick={() => setShowHistory(false)}
+              />
+            ) : null}
+          </div>
+          <TransactionsHistory
+            setShowHistory={setShowHistory}
+            showHistory={showHistory}
+            accountId={accountId}
+            token={token}
+          />
         </div>
       </main>
     </div>
