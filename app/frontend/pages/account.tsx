@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import TransactionForm from "../components/TransactionForm";
+import TransactionsTable from "../components/TransactionsTable";
 import styles from "../styles/Account.module.css";
 import { useWindowSize } from "../utils/helpers";
 
@@ -105,6 +106,10 @@ export default function Account() {
             balance={balance}
             getAccountBalance={getAccountBalance}
           />
+        </div>
+        <div className={styles.AccountDataContainer}>
+          <p className={styles.AccountText}>{`Histórico de transferências`}</p>
+          <TransactionsTable accountId={accountId} token={token} />
         </div>
       </main>
     </div>
