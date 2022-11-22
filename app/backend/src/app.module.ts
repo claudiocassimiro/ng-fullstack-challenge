@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { UsersModule } from './modules/users/users.module';
 import { AccountsModule } from './modules/accounts/accounts.module';
-import { ApiTokenCheckMiddleware } from './middlewares/api-token-check.middleware';
+import { ApiTokenCheckMiddleware } from './shared/middlewares/api-token-check.middleware';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { PrismaService } from './shared/database/prisma.service';
 
