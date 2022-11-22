@@ -40,7 +40,31 @@ export class TransactionsService {
         }
       });
 
-      return [...cashOutTransactions, ...cashInTransactions];
+      const typedTransactions = [...cashOutTransactions, ...cashInTransactions];
+
+      const mapedTransactions = await Promise.all(
+        typedTransactions.map(async (transaction) => {
+          if (transaction.type === 'cashOut') {
+            const { username } = await this.prisma.user.findFirst({
+              where: {
+                accountId: transaction.creditedAccountId,
+              },
+            });
+
+            return { ...transaction, username };
+          }
+
+          const { username } = await this.prisma.user.findFirst({
+            where: {
+              accountId: transaction.debitedAccountId,
+            },
+          });
+
+          return { ...transaction, username };
+        }),
+      );
+
+      return mapedTransactions;
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
@@ -73,7 +97,31 @@ export class TransactionsService {
         }
       });
 
-      return [...cashOutTransactions, ...cashInTransactions];
+      const typedTransactions = [...cashOutTransactions, ...cashInTransactions];
+
+      const mapedTransactions = await Promise.all(
+        typedTransactions.map(async (transaction) => {
+          if (transaction.type === 'cashOut') {
+            const { username } = await this.prisma.user.findFirst({
+              where: {
+                accountId: transaction.creditedAccountId,
+              },
+            });
+
+            return { ...transaction, username };
+          }
+
+          const { username } = await this.prisma.user.findFirst({
+            where: {
+              accountId: transaction.debitedAccountId,
+            },
+          });
+
+          return { ...transaction, username };
+        }),
+      );
+
+      return mapedTransactions;
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
@@ -101,11 +149,33 @@ export class TransactionsService {
         }
       });
 
-      if (type === 'cashOut') {
-        return cashOutTransactions;
-      }
+      const typedTransactions = [...cashOutTransactions, ...cashInTransactions];
 
-      return cashInTransactions;
+      const mapedTransactions = await Promise.all(
+        typedTransactions.map(async (transaction) => {
+          if (transaction.type === 'cashOut') {
+            const { username } = await this.prisma.user.findFirst({
+              where: {
+                accountId: transaction.creditedAccountId,
+              },
+            });
+
+            return { ...transaction, username };
+          }
+
+          const { username } = await this.prisma.user.findFirst({
+            where: {
+              accountId: transaction.debitedAccountId,
+            },
+          });
+
+          return { ...transaction, username };
+        }),
+      );
+
+      return mapedTransactions.filter(
+        (transaction) => transaction.type === type,
+      );
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
