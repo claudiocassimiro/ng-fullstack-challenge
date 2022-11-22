@@ -10,8 +10,12 @@
 
 - **OBS: Verifique se você está na pasta raiz do projeto para execultar os comandos abaixo `pasta ng-challenge`.**
 
+- Adicione as variáveis de ambiente:
+- Front-end: `NEXT_PUBLIC_API_URL='http://localhost:3001'`
+- Back-end: ` POSTGRES_USER=postgres POSTGRES_PASSWORD=postgres JWT_SECRET=secret PORT=3001 DB_PORT=5432 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ng_database?schema=public"`
+
 - Intalar todas as dependencias necessarias com `npm rum install:project`.
-- Para criar o database rode `npm run migrate:dev` esse comando vai rodar o comando `npx prisma migrate dev` no repositório do back-end e gerar as tabelas do banco de dados.
+- _IMPORTANTE_ - Para criar o database rode `npm run migrate:dev` esse comando vai rodar o comando `npx prisma migrate dev` no repositório do back-end e gerar as tabelas do banco de dados.
 
 ## Comandos para execução do projeto
 
