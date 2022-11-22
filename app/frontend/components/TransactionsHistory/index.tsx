@@ -83,36 +83,42 @@ export default function TransactionsHistory({
         </div>
       ) : (
         <div className={styles.TransactionsHistoryContainer}>
-          {transactions?.map((transaction) => {
-            return (
-              <div
-                className={styles.TransactionsContainerTransaction}
-                key={transaction.id}
-              >
-                <div className={styles.TransactionsContainerInfos}>
-                  <span className={styles.TransactionsType}>
-                    {transaction.type === "cashOut"
-                      ? "Transferência enviada"
-                      : "Transferência recebida"}
-                  </span>
-                  <span className={styles.TransactionsUsername}>
-                    {transaction?.username}
-                  </span>
-                  <span className={styles.TransactionsValue}>
-                    {transaction.value.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </span>
+          {transactions
+            ?.sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            ?.map((transaction) => {
+              return (
+                <div
+                  className={styles.TransactionsContainerTransaction}
+                  key={transaction.id}
+                >
+                  <div className={styles.TransactionsContainerInfos}>
+                    <span className={styles.TransactionsType}>
+                      {transaction.type === "cashOut"
+                        ? "Transferência enviada"
+                        : "Transferência recebida"}
+                    </span>
+                    <span className={styles.TransactionsUsername}>
+                      {transaction?.username}
+                    </span>
+                    <span className={styles.TransactionsValue}>
+                      {transaction.value.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </span>
+                  </div>
+                  <div>
+                    <span className={styles.TransactionsDate}>
+                      {formatDate(transaction.createdAt)}
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <span className={styles.TransactionsDate}>
-                    {formatDate(transaction.createdAt)}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       )}
     </div>
