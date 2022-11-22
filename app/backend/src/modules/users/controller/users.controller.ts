@@ -51,7 +51,6 @@ export class UsersController {
       );
     }
 
-    console.log(accountId);
     return this.usersService.getUsernameByAccountId(accountId);
   }
 }
