@@ -88,6 +88,24 @@ export class UsersService {
     }
   }
 
+  async getUsernameByAccountId(
+    accountId: string,
+  ): Promise<{ username: string } | undefined> {
+    try {
+      const { username } = await this.prisma.user.findFirst({
+        where: {
+          accountId,
+        },
+      });
+
+      console.log(username);
+
+      return { username };
+    } catch (error) {
+      throw new HttpException(error.response, error.status);
+    }
+  }
+
   async getUser(username: string): Promise<UserDTO | undefined> {
     try {
       const user = await this.prisma.user.findFirst({
