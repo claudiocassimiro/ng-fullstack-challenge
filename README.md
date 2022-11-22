@@ -54,7 +54,7 @@
 
 #### payload para rota post accounts/balance
 
-1. id: string; id da conta do usuário
+1. accountId: string; id da conta do usuário
 
 `accounts/balance retorna um status 200 e o saldo da conta, que logo ao ser criada já é de R$100`
 
