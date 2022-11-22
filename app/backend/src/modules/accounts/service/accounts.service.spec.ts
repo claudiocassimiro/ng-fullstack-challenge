@@ -75,7 +75,7 @@ describe('AccountsService', () => {
 
       prismaMock.account.findFirst.mockResolvedValue(returnedObject);
 
-      expect(service.getBalance(accountId)).resolves.toBe(100);
+      expect(service.getBalance(accountId)).resolves.toEqual({ balance: 100 });
     });
   });
 
@@ -106,9 +106,9 @@ describe('AccountsService', () => {
       prismaMock.account.findFirst.mockResolvedValue(returnedObject);
       prismaMock.user.findFirst.mockResolvedValue(userObject);
 
-      expect(service.setCashOut(passedObject)).resolves.toBe(
-        'Successful transfer',
-      );
+      expect(service.setCashOut(passedObject)).resolves.toEqual({
+        message: 'Successful transfer',
+      });
     });
 
     it('if has no balance on account and the function setCashOut is called with the rights params, should be throw an error "Insuficient balance"', () => {

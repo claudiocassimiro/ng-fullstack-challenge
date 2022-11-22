@@ -15,6 +15,9 @@ describe('UsersController', () => {
         accountId: expect.any(String),
       };
     }),
+    getUsernameByAccountId: jest.fn(() => {
+      return { username: 'Milena' };
+    }),
   };
 
   beforeEach(async () => {
@@ -70,6 +73,27 @@ describe('UsersController', () => {
 
     it("if the credentials is not passed, the user can't logged", () => {
       expect(controller.login({ username: '', password: '' })).rejects.toThrow(
+        new HttpException(
+          "Please don't send empty fields",
+          HttpStatus.BAD_REQUEST,
+        ),
+      );
+    });
+  });
+
+  describe('when try get username', () => {
+    it('if the accountId is passed, the router return username of passed accountId', () => {
+      expect(
+        controller.getUsernameByAccountId({ accountId: 'mock accountId' }),
+      ).resolves.toEqual({
+        username: 'Milena',
+      });
+    });
+
+    it("if the credentials is not passed, the user can't logged", () => {
+      expect(
+        controller.getUsernameByAccountId({ accountId: '' }),
+      ).rejects.toThrow(
         new HttpException(
           "Please don't send empty fields",
           HttpStatus.BAD_REQUEST,

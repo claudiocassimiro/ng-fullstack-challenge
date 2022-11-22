@@ -83,6 +83,7 @@ describe('UsersService', () => {
 
       const returnedLoginObject = {
         token: '#@#$$332332',
+        username: 'Claudio',
         id: 'mock userId',
         accountId: 'mock accountId',
       };

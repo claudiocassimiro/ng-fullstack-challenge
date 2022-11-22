@@ -31,11 +31,13 @@ describe('AccountsController', () => {
 
   describe('when the user try get the account balance', () => {
     it('if the correct value is passed, should return the balance of user account', () => {
-      expect(controller.getBalance('2345678')).resolves.toEqual(100);
+      expect(controller.getBalance({ accountId: '2345678' })).resolves.toEqual(
+        100,
+      );
     });
 
     it('if the value passed is empty, should throw an exception', () => {
-      expect(controller.getBalance('')).rejects.toThrow(
+      expect(controller.getBalance({ accountId: '' })).rejects.toThrow(
         new HttpException(
           "Please don't pass empty fields",
           HttpStatus.BAD_REQUEST,
