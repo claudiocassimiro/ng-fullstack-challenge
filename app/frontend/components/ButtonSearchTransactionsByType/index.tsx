@@ -52,12 +52,16 @@ export default function ButtonSearchTransactionsByType({
       <button
         className={styles.ButtonSearchTransactionsButton}
         type="button"
+        data-testid="open-transaction-by-type"
         onClick={() => setShowByType(!showByType)}
       >
         Ver transações por tipo
       </button>
       {showByType ? (
-        <div className={styles.ButtonSearchTransactionsContainerConfig}>
+        <div
+          data-testid="transactions-by-type"
+          className={styles.ButtonSearchTransactionsContainerConfig}
+        >
           <div className={styles.ButtonSearchTransactionsContainerInput}>
             <label
               className={styles.ButtonSearchTransactionsRadioLabel}
@@ -89,12 +93,18 @@ export default function ButtonSearchTransactionsByType({
           </div>
 
           {errorMessage.length > 0 ? (
-            <p className={styles.ButtonSearchErrorMessage}>{errorMessage}</p>
+            <p
+              data-testid="error-message"
+              className={styles.ButtonSearchErrorMessage}
+            >
+              {errorMessage}
+            </p>
           ) : null}
 
           <button
             className={styles.ButtonSearchTransactionsActionButton}
             type="button"
+            data-testid="search-by-transactions"
             onClick={getAllTransactionsByType}
           >
             Buscar Transações por tipo
