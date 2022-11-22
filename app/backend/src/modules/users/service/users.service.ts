@@ -4,7 +4,6 @@ import { PrismaService } from '../../../shared/database/prisma.service';
 import { BcryptService } from '../../../shared/hash/BcryptService';
 import { UserDTO } from '../dto/users.dto';
 import { JWTService } from '../../../shared/jwt/JWTService';
-import { JwtPayload } from 'jsonwebtoken';
 import { UserLogin } from '../types';
 
 @Injectable()
