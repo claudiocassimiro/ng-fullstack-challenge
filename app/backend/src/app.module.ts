@@ -26,5 +26,8 @@ export class AppModule implements NestModule {
     consumer
       .apply(ApiTokenCheckMiddleware)
       .forRoutes({ path: '/accounts/cashout', method: RequestMethod.POST });
+    consumer
+      .apply(ApiTokenCheckMiddleware)
+      .forRoutes({ path: '/users/getusername', method: RequestMethod.POST });
   }
 }
