@@ -50,7 +50,7 @@ export default function Account() {
             "Content-Type": "application/json",
             token: token,
           },
-          body: JSON.stringify({ id: accountId }),
+          body: JSON.stringify({ accountId }),
         }
       );
 
