@@ -65,7 +65,7 @@ export default function Form({ buttonText, pathToCall }: FormProps) {
 
       if (buttonText === "Criar conta") {
         if (response.status === 201) {
-          router.push("/login");
+          return router.push("/login");
         }
 
         const data = await response.json();
