@@ -5,8 +5,6 @@ import styles from "./styles.module.css";
 interface ButtonSearchTransactionByDate {
   token: string;
   accountId: string;
-  showByDate: boolean;
-  setShowByDate: (value: boolean) => void;
   setTransactions: (value: Transactions[]) => void;
   setShowTable: (value: boolean) => void;
 }
@@ -14,14 +12,12 @@ interface ButtonSearchTransactionByDate {
 export default function ButtonSearchTransactionByDate({
   token,
   accountId,
-  showByDate,
-  setShowByDate,
   setTransactions,
   setShowTable,
 }: ButtonSearchTransactionByDate) {
   const [date, setDate] = useState("");
   const [transactionType, setTransactionType] = useState("");
-
+  const [showByDate, setShowByDate] = useState(false);
   const getAllTransactionsByDate = async () => {
     try {
       const response = await fetch(
@@ -38,10 +34,7 @@ export default function ButtonSearchTransactionByDate({
 
       const data = await response.json();
 
-      console.log(data);
-
       if (transactionType) {
-        console.log("type", transactionType);
         const filteredTransaction = data.filter(
           (transaction: Transactions) => transaction.type === transactionType
         );
@@ -90,6 +83,7 @@ export default function ButtonSearchTransactionByDate({
               <input
                 id="cashout"
                 type="radio"
+                name="type"
                 value="cashOut"
                 onChange={(e) => setTransactionType(e.target.value)}
               />
@@ -103,6 +97,7 @@ export default function ButtonSearchTransactionByDate({
               <input
                 id="cashin"
                 type="radio"
+                name="type"
                 value="cashIn"
                 onChange={(e) => setTransactionType(e.target.value)}
               />
