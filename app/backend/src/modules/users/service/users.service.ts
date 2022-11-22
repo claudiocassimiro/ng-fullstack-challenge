@@ -89,20 +89,6 @@ export class UsersService {
     }
   }
 
-  async getUserToAuth({ id }: JwtPayload): Promise<UserDTO | undefined> {
-    try {
-      const user = await this.prisma.user.findUnique({
-        where: {
-          id,
-        },
-      });
-
-      return user;
-    } catch (error) {
-      throw new HttpException(error.response, error.status);
-    }
-  }
-
   async getUser(username: string): Promise<UserDTO | undefined> {
     try {
       const user = await this.prisma.user.findFirst({
