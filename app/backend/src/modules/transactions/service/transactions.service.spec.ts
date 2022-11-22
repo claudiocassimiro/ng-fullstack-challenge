@@ -60,6 +60,7 @@ describe('TransactionsService', () => {
       const transactions = [
         {
           id: '123',
+          type: 'cashOut',
           debitedAccountId: 'mock debitedAccountId',
           creditedAccountId: 'mock creditedAccountId',
           value: 100,
@@ -67,6 +68,7 @@ describe('TransactionsService', () => {
         },
         {
           id: '1234',
+          type: 'cashOut',
           debitedAccountId: 'mock debitedAccountId',
           creditedAccountId: 'mock creditedAccountId',
           value: 140,
@@ -74,6 +76,7 @@ describe('TransactionsService', () => {
         },
         {
           id: '1235',
+          type: 'cashOut',
           debitedAccountId: 'mock debitedAccountId',
           creditedAccountId: 'mock creditedAccountId',
           value: 150,

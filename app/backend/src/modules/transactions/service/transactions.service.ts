@@ -29,7 +29,18 @@ export class TransactionsService {
         },
       });
 
-      return transactions;
+      const cashOutTransactions = [];
+      const cashInTransactions = [];
+
+      transactions.forEach((transaction) => {
+        if (transaction.debitedAccountId === accountId) {
+          cashOutTransactions.push({ type: 'cashOut', ...transaction });
+        } else {
+          cashInTransactions.push({ type: 'cashIn', ...transaction });
+        }
+      });
+
+      return [...cashOutTransactions, ...cashInTransactions];
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
