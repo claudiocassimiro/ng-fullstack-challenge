@@ -6,14 +6,14 @@ interface ButtonSearchTransactionsByTypeProps {
   token: string;
   accountId: string;
   setTransactions: (value: Transactions[]) => void;
-  setShowTable: (value: boolean) => void;
+  setShowHistory: (value: boolean) => void;
 }
 
 export default function ButtonSearchTransactionsByType({
   token,
   accountId,
   setTransactions,
-  setShowTable,
+  setShowHistory,
 }: ButtonSearchTransactionsByTypeProps) {
   const [showByType, setShowByType] = useState(false);
   const [transactionType, setTransactionType] = useState("");
@@ -39,7 +39,7 @@ export default function ButtonSearchTransactionsByType({
       const data = await response.json();
 
       setTransactions(data);
-      setShowTable(true);
+      setShowHistory(true);
     } catch (error) {
       console.log(error);
     }

@@ -4,17 +4,17 @@ import ButtonSearchTransactionByDate from "../ButtonSearchTransactionsByDate";
 import ButtonSearchTransactionsByType from "../ButtonSearchTransactionsByType";
 import styles from "./styles.module.css";
 
-interface TransactionsTableProps {
+interface TransactionsHistoryProps {
   accountId: string;
   token: string;
 }
 
-export default function TransactionsTable({
+export default function TransactionsHistory({
   accountId,
   token,
-}: TransactionsTableProps) {
+}: TransactionsHistoryProps) {
   const [transactions, setTransactions] = useState<Transactions[]>();
-  const [showTable, setShowTable] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
   const getAllTransactions = async () => {
     try {
       const response = await fetch(
@@ -38,7 +38,7 @@ export default function TransactionsTable({
 
   return (
     <div className={styles.TransactionsContainer}>
-      {!showTable ? (
+      {!showHistory ? (
         <div className={styles.TransactionsContainerButtons}>
           <button
             className={styles.TransactionsButton}
@@ -52,14 +52,14 @@ export default function TransactionsTable({
             token={token}
             accountId={accountId}
             setTransactions={setTransactions}
-            setShowTable={setShowTable}
+            setShowHistory={setShowHistory}
           />
 
           <ButtonSearchTransactionsByType
             token={token}
             accountId={accountId}
             setTransactions={setTransactions}
-            setShowTable={setShowTable}
+            setShowHistory={setShowHistory}
           />
         </div>
       ) : (

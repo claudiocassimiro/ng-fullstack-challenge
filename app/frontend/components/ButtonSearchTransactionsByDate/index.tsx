@@ -6,14 +6,14 @@ interface ButtonSearchTransactionByDate {
   token: string;
   accountId: string;
   setTransactions: (value: Transactions[]) => void;
-  setShowTable: (value: boolean) => void;
+  setShowHistory: (value: boolean) => void;
 }
 
 export default function ButtonSearchTransactionByDate({
   token,
   accountId,
   setTransactions,
-  setShowTable,
+  setShowHistory,
 }: ButtonSearchTransactionByDate) {
   const [date, setDate] = useState("");
   const [transactionType, setTransactionType] = useState("");
@@ -46,7 +46,7 @@ export default function ButtonSearchTransactionByDate({
 
       setDate("");
       setTransactionType("");
-      setShowTable(true);
+      setShowHistory(true);
     } catch (error) {
       console.log(error);
     }
