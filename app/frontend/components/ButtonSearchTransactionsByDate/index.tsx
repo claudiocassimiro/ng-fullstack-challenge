@@ -56,12 +56,16 @@ export default function ButtonSearchTransactionByDate({
       <button
         className={styles.ButtonSearchTransactionsButton}
         type="button"
+        data-testid="open-transaction-by-date"
         onClick={() => setShowByDate(!showByDate)}
       >
         Ver transações por data
       </button>
       {showByDate ? (
-        <div className={styles.ButtonSearchTransactionsContainerConfig}>
+        <div
+          data-testid="transactions-by-date"
+          className={styles.ButtonSearchTransactionsContainerConfig}
+        >
           <div className={styles.ButtonSearchTransactionsContainerInput}>
             <input
               className={styles.ButtonSearchTransactionsDateInput}
