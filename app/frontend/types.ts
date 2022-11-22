@@ -23,4 +23,5 @@ export interface Transactions {
   id: string;
   value: number;
   type?: string;
+  username?: string;
 }
