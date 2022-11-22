@@ -92,15 +92,17 @@ export class UsersService {
     accountId: string,
   ): Promise<{ username: string } | undefined> {
     try {
-      const { username } = await this.prisma.user.findFirst({
+      const user = await this.prisma.user.findFirst({
         where: {
           accountId,
         },
       });
 
-      console.log(username);
+      if (!user) {
+        return null;
+      }
 
-      return { username };
+      return { username: user.username };
     } catch (error) {
       throw new HttpException(error.response, error.status);
     }
