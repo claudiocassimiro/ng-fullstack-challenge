@@ -5,7 +5,7 @@ import { JWTService } from '../../../shared/jwt/JWTService';
 import { UsersService } from './users.service';
 import { prismaMock } from './../../../../singleton';
 import { mockDeep } from 'jest-mock-extended';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 describe('UsersService', () => {
@@ -147,6 +147,28 @@ describe('UsersService', () => {
       prismaMock.user.findFirst.mockResolvedValue(user);
 
       expect(service.getUser('Paulo')).resolves.toEqual(null);
+    });
+
+    it('when the getUsernameByAccountId function is called with an accountId of a exiting user, shoud be returned a user object', () => {
+      const username = {
+        username: 'Claudio',
+      } as User;
+
+      prismaMock.user.findFirst.mockResolvedValue(username);
+
+      expect(
+        service.getUsernameByAccountId('123123123123123123123123123123'),
+      ).resolves.toEqual(username);
+    });
+
+    it('when the getUsernameByAccountId function is called with a accountId of a non-existent user, shoud be returned null', () => {
+      const username = null;
+
+      prismaMock.user.findFirst.mockResolvedValue(username);
+
+      expect(
+        service.getUsernameByAccountId('12312312312312312434253676566867456'),
+      ).resolves.toBe(null);
     });
   });
 });
