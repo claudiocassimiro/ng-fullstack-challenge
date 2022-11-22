@@ -15,3 +15,12 @@ export interface UserObject {
   status?: number;
   message?: string;
 }
+
+export interface Transactions {
+  createdAt: Date;
+  creditedAccountId: string;
+  debitedAccountId: string;
+  id: string;
+  value: number;
+  type?: string;
+}
