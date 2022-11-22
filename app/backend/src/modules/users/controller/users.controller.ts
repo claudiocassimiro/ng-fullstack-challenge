@@ -40,4 +40,18 @@ export class UsersController {
     }
     return this.usersService.login({ username, password });
   }
+
+  @Post('/getusername')
+  @HttpCode(200)
+  async getUsernameByAccountId(@Body() { accountId }: { accountId: string }) {
+    if (!accountId) {
+      throw new HttpException(
+        "Please don't send empty fields",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    console.log(accountId);
+    return this.usersService.getUsernameByAccountId(accountId);
+  }
 }
