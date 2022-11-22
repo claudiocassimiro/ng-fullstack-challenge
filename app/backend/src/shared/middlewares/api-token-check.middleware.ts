@@ -1,9 +1,16 @@
-import { HttpException, HttpStatus, NestMiddleware } from '@nestjs/common';
+import {
+  Injectable,
+  HttpException,
+  HttpStatus,
+  NestMiddleware,
+} from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { JWTService } from '../../shared/jwt/JWTService';
-import { UsersService } from '../../modules/users/service/users.service';
+import { JWTService } from '../jwt/JWTService';
+import { PrismaService } from 'src/shared/database/prisma.service';
 
+@Injectable()
 export class ApiTokenCheckMiddleware implements NestMiddleware {
+  constructor(private prisma: PrismaService) {}
   async use(req: Request, res: Response, next: NextFunction) {
     let { token } = req.headers;
 
@@ -12,12 +19,14 @@ export class ApiTokenCheckMiddleware implements NestMiddleware {
     }
 
     const jwt = new JWTService();
-    const usersService = new UsersService();
 
     try {
-      const userId = await jwt.verify(token);
-
-      const user = await usersService.getUserToAuth({ userId });
+      const { id } = await jwt.verify(token);
+      const user = await this.prisma.user.findFirst({
+        where: {
+          id,
+        },
+      });
 
       if (!user) {
         throw new HttpException('Token Invalido', HttpStatus.BAD_REQUEST);
