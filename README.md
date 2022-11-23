@@ -1,6 +1,4 @@
-# Bem vinda(o) ao desafio fullstack ng.cash
-
-`Olá avaliador(a), não precisa instalar o projeto, faça os testes pelo link em produção: https://ng-frontend.vercel.app/ ^^`
+# Bem vinda(o) ao desafio fullstack ng.casha
 
 ## Dependências necessarias para executar o projeto
 
