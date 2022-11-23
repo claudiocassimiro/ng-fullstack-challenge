@@ -51,6 +51,7 @@
 1. token: string; token do usuario
 2. id: string; id do usuario
 3. accountId: string; id da conta do usuário
+4. username: nome do usuario
 
 <br />
 
