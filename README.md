@@ -1,5 +1,9 @@
 # Bem vinda(o) ao desafio fullstack ng.casha
 
+[Repositorio do projeto no github](https://github.com/claudiocassimiro/ng-fullstack-challenge)
+<br />
+[Meu LinkedIn](https://www.linkedin.com/in/claudiocassimiro/)
+
 ## Dependências necessarias para executar o projeto
 
 - node v16.18.1
