@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 import { JWTService } from '../jwt/JWTService';
-import { PrismaService } from 'src/shared/database/prisma.service';
+import { PrismaService } from '../../shared/database/prisma.service';
 
 @Injectable()
 export class ApiTokenCheckMiddleware implements NestMiddleware {

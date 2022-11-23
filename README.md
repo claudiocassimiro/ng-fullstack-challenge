@@ -1,5 +1,7 @@
 # Bem vinda(o) ao desafio fullstack ng.cash
 
+`Olá avaliador(a), não precisa instalar o projeto, faça os testes pelo link em produção: https://ng-frontend.vercel.app/ ^^`
+
 ## Dependências necessarias para executar o projeto
 
 - node v16.18.1
