@@ -19,12 +19,13 @@
 - Back-end: ` POSTGRES_USER=postgres POSTGRES_PASSWORD=postgres JWT_SECRET=secret PORT=3001 DB_PORT=5432 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ng_database?schema=public"`
 
 - Intalar todas as dependencias necessarias com `npm rum install:project`.
-- _IMPORTANTE_ - Para criar o database rode `npm run migrate:dev` esse comando vai rodar o comando `npx prisma migrate dev` no repositório do back-end e gerar as tabelas do banco de dados.
 
 ## Comandos para execução do projeto
 
 - `npm rum compose:up` vai rodar o `docker-compose up` com algumas flags para rodar os containers do front-end, back-end e database.
 - Para parar a execução dos containers front-end, back-end e database, utilize `npm rum compose:down` que irá rodar o comando `docker-compose down` com algumas flags.
+
+- _IMPORTANTE_ - Com os containers rodando execute `npm run migrate:dev` esse comando vai rodar o comando `npx prisma migrate dev && npx prisma generate` no repositório do back-end e gerar as tabelas do banco de dados.
 
 ## Portas da aplicação
 
